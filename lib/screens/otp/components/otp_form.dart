@@ -40,7 +40,7 @@ class _OtpFormState extends State<OtpForm> {
             press: () {
               if (_formKey.currentState!.validate()) {
                 _formKey.currentState!.save();
-                print("${otp.join()}");
+                print(otp.join());
               }
 
               if (otp.isNotEmpty) {

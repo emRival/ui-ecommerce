@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:ui_ecommerce/constant.dart';
 import 'package:ui_ecommerce/screens/home/components/icon_with_trigger.dart';
 import 'package:ui_ecommerce/screens/home/components/search_field.dart';
 import 'package:ui_ecommerce/size_config.dart';
