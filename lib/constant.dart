@@ -53,3 +53,12 @@ OutlineInputBorder otpOutlineInputBorder() {
       borderRadius: BorderRadius.circular(15),
       borderSide: const BorderSide(color: kTextColor));
 }
+
+const defaultDuration = Duration(milliseconds: 250);
+
+// const for see more
+TextStyle seeMoreStyle = TextStyle(
+  fontSize: getPropScreenWidth(14),
+  fontWeight: FontWeight.bold,
+  color: kPrimaryColor,
+);

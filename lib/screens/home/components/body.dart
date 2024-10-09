@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:ui_ecommerce/constant.dart';
 import 'package:ui_ecommerce/screens/home/components/banner_discount_home.dart';
 import 'package:ui_ecommerce/screens/home/components/categories_home.dart';
 import 'package:ui_ecommerce/screens/home/components/header_home_part.dart';
 import 'package:ui_ecommerce/screens/home/components/popular_products.dart';
-import 'package:ui_ecommerce/screens/home/components/section_title.dart';
 import 'package:ui_ecommerce/screens/home/components/special_offers.dart';
 import 'package:ui_ecommerce/size_config.dart';
 

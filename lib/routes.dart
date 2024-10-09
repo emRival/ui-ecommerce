@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:ui_ecommerce/model/products.dart';
 import 'package:ui_ecommerce/screens/complete_profile/complete_profile_screen.dart';
+import 'package:ui_ecommerce/screens/details/detail_screen.dart';
 import 'package:ui_ecommerce/screens/forgot_password/forgot_password_screen.dart';
 import 'package:ui_ecommerce/screens/home/home_screen.dart';
 import 'package:ui_ecommerce/screens/login_success/login_success_screen.dart';
@@ -16,5 +18,9 @@ final Map<String, WidgetBuilder> routes = {
   SignUpScreen.routeName: (context) => const SignUpScreen(),
   CompleteProfileScreen.routeName: (context) => const CompleteProfileScreen(),
   OtpScreen.routeName: (context) => const OtpScreen(),
-  HomeScreen.routeName: (context) => const HomeScreen()
+  HomeScreen.routeName: (context) => const HomeScreen(),
+  DetailScreen.routeName: (context) {
+    final product = ModalRoute.of(context)!.settings.arguments as Product;
+    return DetailScreen(product: product);
+  },
 };
