@@ -6,7 +6,7 @@ class Product {
   final List<String> images;
   final List<Color> colors;
   final double rating, price;
-  final bool isFavourite, isPopular;
+   bool isFavourite, isPopular;
 
   Product({
     required this.id,
@@ -36,7 +36,7 @@ List<Product> demoProducts = [
       const Color(0xFFF6625E),
       const Color(0xFF836DB8),
       const Color(0xFFDECB9C),
-      Colors.white,
+      Colors.red,
     ],
     title: "Wireless Controller for PS4™",
     price: 64.99,

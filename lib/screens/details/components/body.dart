@@ -1,110 +1,130 @@
 import 'package:flutter/material.dart';
-import 'package:readmore/readmore.dart';
-import 'package:ui_ecommerce/constant.dart';
+import 'package:provider/provider.dart';
+import 'package:ui_ecommerce/components/my_default_button.dart';
+import 'package:ui_ecommerce/components/rounded_icon_button.dart';
+import 'package:ui_ecommerce/model/cart.dart';
 import 'package:ui_ecommerce/model/products.dart';
+import 'package:ui_ecommerce/screens/details/components/color_picker.dart';
+import 'package:ui_ecommerce/screens/details/components/detail_description.dart';
 import 'package:ui_ecommerce/screens/details/components/image_detail.dart';
+import 'package:ui_ecommerce/screens/details/components/rounded_container.dart';
 import 'package:ui_ecommerce/size_config.dart';
+import 'package:ui_ecommerce/state_managements/cart_provider.dart';
+import 'package:ui_ecommerce/state_managements/favorite_provider.dart';
 
-class Body extends StatelessWidget {
+class Body extends StatefulWidget {
   const Body({super.key, required this.product});
 
   final Product product;
 
   @override
+  State<Body> createState() => _BodyState();
+}
+
+class _BodyState extends State<Body> {
+  int currentSelectedColor = 0;
+  int totalSelected = 1;
+  @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      child: Column(
-        children: [
-          ImageDetail(product: product),
-          RoundedContainer(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: getPropScreenWidth(20)),
-                      child: Text(
-                        product.title,
-                        style: TextStyle(
-                          fontSize: getPropScreenWidth(20),
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: Container(
-                        padding: EdgeInsets.all(getPropScreenWidth(15)),
-                        width: getPropScreenWidth(64),
-                        decoration: BoxDecoration(
-                          color: product.isFavourite
-                              ? kPrimaryColor.withOpacity(0.1)
-                              : kSecondaryColor.withOpacity(0.1),
-                          borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(20),
-                            bottomLeft: Radius.circular(20),
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            ImageDetail(product: widget.product),
+            RoundedContainer(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  DetailDescription(product: widget.product),
+                  SizedBox(
+                    height: getPropScreenWidth(40),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: getPropScreenWidth(20)),
+                    child: SizedBox(
+                      height: getPropScreenWidth(40),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          ...List.generate(
+                            widget.product.colors.length,
+                            (index) {
+                              final Color color = widget.product.colors[index];
+                              return GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    currentSelectedColor = index;
+                                  });
+                                },
+                                child: ItemColorDot(
+                                  color: color,
+                                  isSelected: index == currentSelectedColor,
+                                ),
+                              );
+                            },
                           ),
-                        ),
-                        child: Icon(
-                          Icons.favorite,
-                          size: getPropScreenWidth(18),
-                          color: product.isFavourite
-                              ? Colors.red
-                              : kSecondaryColor.withOpacity(0.5),
-                        ),
+                          const Spacer(),
+                          Row(
+                            children: [
+                              RoundedIconBtn(
+                                  icon: Icons.remove,
+                                  press: totalSelected > 1
+                                      ? () {
+                                          setState(() {
+                                            totalSelected--;
+                                          });
+                                        }
+                                      : null),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 10),
+                                child: Text(
+                                  "$totalSelected",
+                                  style: Theme.of(context).textTheme.bodyLarge,
+                                ),
+                              ),
+                              RoundedIconBtn(
+                                  icon: Icons.add,
+                                  showShadow: true,
+                                  press: () {
+                                    setState(() {
+                                      totalSelected++;
+                                    });
+                                  }),
+                            ],
+                          )
+                        ],
                       ),
                     ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                        left: getPropScreenWidth(20),
-                        right: getPropScreenWidth(64),
-                      ),
-                      child: ReadMoreText(product.description,
-                          trimMode: TrimMode.Line,
-                          trimLines: 2,
-                          colorClickableText: kPrimaryColor,
-                          trimCollapsedText: "\nSee More Detail >",
-                          trimExpandedText: "\nSee Less Detail >",
-                          moreStyle: seeMoreStyle,
-                          lessStyle: seeMoreStyle),
-                    )
-                  ],
-                )
-              ],
-            ),
-          )
-        ],
-      ),
-    );
-  }
-}
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: getPropScreenWidth(70),
+                        vertical: getPropScreenWidth(40)),
+                    child: MyDefaultButton(
+                        text: "Add To Cart",
+                        press: () {
+                          Provider.of<CartProvider>(context, listen: false)
+                              .addCartItem(Cart(
+                                  product: widget.product,
+                                  numOfItem: totalSelected));
+                          Provider.of<FavoriteProvider>(context, listen: false)
+                              .toggleFavoriteStatus(widget.product.id);
 
-class RoundedContainer extends StatelessWidget {
-  const RoundedContainer({
-    super.key,
-    required this.child,
-  });
-
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(top: getPropScreenWidth(20)),
-      padding: EdgeInsets.only(top: getPropScreenWidth(20)),
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: kSecondaryColor.withOpacity(0.2),
-        borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(50),
-          topRight: Radius.circular(50),
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(const SnackBar(
+                            content: Text("Added to cart"),
+                          ));
+                        }),
+                  )
+                ],
+              ),
+            )
+          ],
         ),
       ),
-      child: child,
     );
   }
 }

@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:ui_ecommerce/components/costum_navigation_bar.dart';
 import 'package:ui_ecommerce/model/products.dart';
+import 'package:ui_ecommerce/screens/cart/cart_screen.dart';
 import 'package:ui_ecommerce/screens/complete_profile/complete_profile_screen.dart';
 import 'package:ui_ecommerce/screens/details/detail_screen.dart';
+import 'package:ui_ecommerce/screens/favourite/favourite_screen.dart';
 import 'package:ui_ecommerce/screens/forgot_password/forgot_password_screen.dart';
 import 'package:ui_ecommerce/screens/home/home_screen.dart';
 import 'package:ui_ecommerce/screens/login_success/login_success_screen.dart';
 import 'package:ui_ecommerce/screens/otp/otp_screen.dart';
+import 'package:ui_ecommerce/screens/profile/profile_screen.dart';
 import 'package:ui_ecommerce/screens/sign_in/sign_in_screen.dart';
 import 'package:ui_ecommerce/screens/sign_up/sign_up_screen.dart';
 import 'package:ui_ecommerce/screens/splash/splash_screen.dart';
@@ -23,4 +27,8 @@ final Map<String, WidgetBuilder> routes = {
     final product = ModalRoute.of(context)!.settings.arguments as Product;
     return DetailScreen(product: product);
   },
+  CartScreen.routeName: (context) => const CartScreen(),
+  ProfileScreen.routeName: (context) => const ProfileScreen(),
+  CustomNavigationBar.routeName: (context) => const CustomNavigationBar(),
+  FavouriteScreen.routeName: (context) => const FavouriteScreen(),
 };

@@ -28,7 +28,7 @@ class IconWithTrigger extends StatelessWidget {
           ),
           child: SvgPicture.asset(svgIcon),
         ),
-        if (trigger != null)
+        if (trigger != null && trigger != "0")
           Positioned(
               right: 0,
               top: -3,

@@ -16,10 +16,11 @@ const kSecondaryColor = Color(0xff979797);
 const kTextColor = Color(0xff757575);
 const kAnimationDuration = Duration(milliseconds: 200);
 
+const inActiveIconColor = Color(0xffb6b6b6);
+
 final headingStyle = TextStyle(
   fontSize: getPropScreenWidth(28),
   fontWeight: FontWeight.bold,
-  color: Colors.black,
   height: 1.5,
 );
 

@@ -61,7 +61,8 @@ class _BodyState extends State<Body> {
                     MyDefaultButton(
                       text: "Continue",
                       press: () {
-                        Navigator.pushNamed(context, SignInScreen.routeName);
+                        Navigator.pushReplacementNamed(
+                            context, SignInScreen.routeName);
                       },
                     ),
                     const Spacer(),

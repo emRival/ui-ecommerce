@@ -30,7 +30,6 @@ class _BodyState extends State<Body> {
                 Text(
                   "Welcome Back",
                   style: TextStyle(
-                    color: Colors.black,
                     fontSize: getPropScreenWidth(28),
                     fontWeight: FontWeight.bold,
                   ),

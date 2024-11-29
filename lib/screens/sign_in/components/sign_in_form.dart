@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:ui_ecommerce/components/costum_suffix_icon.dart';
 import 'package:ui_ecommerce/components/error_form.dart';
 import 'package:ui_ecommerce/components/my_default_button.dart';
@@ -6,6 +7,7 @@ import 'package:ui_ecommerce/constant.dart';
 import 'package:ui_ecommerce/screens/forgot_password/forgot_password_screen.dart';
 import 'package:ui_ecommerce/screens/login_success/login_success_screen.dart';
 import 'package:ui_ecommerce/size_config.dart';
+import 'package:ui_ecommerce/state_managements/auth_provider.dart';
 
 class SignInForm extends StatefulWidget {
   const SignInForm({super.key});
@@ -43,7 +45,9 @@ class _SignInFormState extends State<SignInForm> {
               }
 
               if (errors.isEmpty) {
-                Navigator.pushNamed(context, LoginSuccessScreen.routeName);
+                Provider.of<AuthProvider>(context, listen: false).setAuth(true);
+                Navigator.pushNamedAndRemoveUntil(context, LoginSuccessScreen.routeName,
+                  (Route<dynamic> route) => false);
               }
               
             },
