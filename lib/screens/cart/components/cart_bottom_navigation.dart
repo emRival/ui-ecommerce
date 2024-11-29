@@ -65,8 +65,7 @@ class CartBottomNavigation extends StatelessWidget {
                   TextSpan(
                     text: "\$${cart.totalPrice}",
                     style: const TextStyle(
-                      fontSize: 16,
-                    ),
+                        fontSize: 16, fontWeight: FontWeight.w800),
                   ),
                 ])),
                 const Spacer(),
