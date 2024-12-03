@@ -2,19 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:ui_ecommerce/model/products.dart';
 
 class FavoriteProvider with ChangeNotifier {
-  List<Product> _listProducts = demoProducts;
-// get favorite products = true from list products
+  final List<Product> _listProducts = demoProducts;
 
-  List<Product> get products => _listProducts;
-
-  FavoriteProvider() {
-    print(favoriteProducts.asMap());
-  }
-
-  List<Product> get favoriteProducts {
+  List<Product> get favouriteProducts {
     return _listProducts.where((product) => product.isFavourite).toList();
   }
 
+  List<Product> get listProducts => _listProducts;
+  
   void toggleFavoriteStatus(int id) {
     final productIndex =
         _listProducts.indexWhere((product) => product.id == id);

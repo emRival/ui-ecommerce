@@ -16,8 +16,7 @@ class _BodyState extends State<Body> {
   @override
   Widget build(BuildContext context) {
     return Consumer<CartProvider>(
-      builder: (context, cartData, child) => 
-      ListView.builder(
+      builder: (context, cartData, child) => ListView.builder(
           itemCount: cartData.cartItems.length,
           itemBuilder: (context, index) {
             final Cart cart = cartData.cartItems[index];
@@ -30,7 +29,7 @@ class _BodyState extends State<Body> {
                 key: Key(cart.product.id.toString()),
                 direction: DismissDirection.endToStart,
                 onDismissed: (direction) {
-                 cartData.removeCartItem(cart);
+                  cartData.removeCartItem(cart);
                 },
                 background: Container(
                   decoration: BoxDecoration(

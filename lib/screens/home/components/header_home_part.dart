@@ -27,7 +27,7 @@ class HeaderHomePart extends StatelessWidget {
               builder: (context, cart, child) => 
               IconWithTrigger(
                 svgIcon: "assets/icons/Cart Icon.svg",
-                trigger: cart.totalItems.toString(),
+                trigger: cart.cartItems.length.toString(),
               ),
             ),
           ),

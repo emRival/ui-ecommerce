@@ -110,8 +110,12 @@ class _BodyState extends State<Body> {
                               .addCartItem(Cart(
                                   product: widget.product,
                                   numOfItem: totalSelected));
-                          Provider.of<FavoriteProvider>(context, listen: false)
-                              .toggleFavoriteStatus(widget.product.id);
+
+                          if (widget.product.isFavourite) {
+                            Provider.of<FavoriteProvider>(context,
+                                    listen: false)
+                                .toggleFavoriteStatus(widget.product.id);
+                          }
 
                           ScaffoldMessenger.of(context)
                               .showSnackBar(const SnackBar(

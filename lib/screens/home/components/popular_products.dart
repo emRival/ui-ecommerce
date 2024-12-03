@@ -31,8 +31,8 @@ class PopularProducts extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: getPropScreenWidth(10)),
               child: Consumer<FavoriteProvider>(
                 builder: (context, products, child) => Row(
-                  children: List.generate(products.products.length, (index) {
-                    final Product product = products.products[index];
+                  children: List.generate(products.listProducts.length, (index) {
+                    final Product product = products.listProducts[index];
                     return ItemPopularProduct(
                       product: product,
                       press: () => Navigator.pushNamed(

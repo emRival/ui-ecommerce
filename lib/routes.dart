@@ -30,5 +30,6 @@ final Map<String, WidgetBuilder> routes = {
   CartScreen.routeName: (context) => const CartScreen(),
   ProfileScreen.routeName: (context) => const ProfileScreen(),
   CustomNavigationBar.routeName: (context) => const CustomNavigationBar(),
+  // FavouriteScreen.routeName: (context) => const FavouriteScreen(),
   FavouriteScreen.routeName: (context) => const FavouriteScreen(),
 };
